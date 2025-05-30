@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Group from "../assets/Group.svg";
-import Path from "../assets/path.svg";
+import Path from "../assets/Path.svg";
 import LogoImage from "../assets/Logo_icon.svg";
 import UserImage from "../assets/user.png";
 
