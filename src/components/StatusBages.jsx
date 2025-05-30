@@ -19,19 +19,21 @@ export default function StatusBadge({ status = "draft" }) {
     },
   };
 
+  const currentStyle = style[status?.toLowerCase()] || style["draft"];
+
   return (
     <span
       className={`${buttonVariants({
         variant: "outline",
-      })}min-w-[104px] border-none`}
+      })} min-w-[104px] border-none flex items-center gap-2 justify-center py-1 px-2 rounded-md`}
       style={{
-        backgroundColor: style[status].bg,
+        backgroundColor: currentStyle.bg,
       }}
     >
       <span
-        className={`inline-block w-2 h-2 rounded-full ${style[status].dote}`}
+        className={`inline-block w-2 h-2 rounded-full ${currentStyle.dote}`}
       ></span>
-      <span className={`capitalize ${style[status].text}`}>{status}</span>
+      <span className={`capitalize ${currentStyle.text}`}>{status}</span>
     </span>
   );
 }

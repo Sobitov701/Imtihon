@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import ItemList from "./ItemList"; // <-- ItemList import qilindi
+import ItemList from "./ItemList";
 import { prepareData } from "../lib/utils";
 import {
   Select,
@@ -92,7 +92,6 @@ function Form({ info = {}, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit} className="p-6 h-auto space-y-6">
-      {/* Bill From */}
       <div>
         <h3 className="text-2xl font-medium mb-4">Bill From</h3>
         <div className="flex flex-col gap-5">
@@ -118,7 +117,6 @@ function Form({ info = {}, onSubmit }) {
         </div>
       </div>
 
-      {/* Bill To */}
       <div>
         <h3 className="text-2xl font-medium mb-4">Bill To</h3>
         <div className="flex flex-col gap-5">
@@ -136,7 +134,6 @@ function Form({ info = {}, onSubmit }) {
         </div>
       </div>
 
-      {/* Bill To Address */}
       <div>
         <h3 className="text-2xl font-medium mb-4">Bill To Address</h3>
         <div className="flex flex-col gap-5">
@@ -161,7 +158,6 @@ function Form({ info = {}, onSubmit }) {
         </div>
       </div>
 
-      {/* Invoice Date and Payment Terms */}
       <div className="flex gap-10 items-end">
         <div className="flex-1">
           <Label htmlFor="createdAt">Invoice Date</Label>
@@ -191,25 +187,19 @@ function Form({ info = {}, onSubmit }) {
         </div>
       </div>
 
-      {/* Description */}
       <InputBlock
         name="description"
         defaultValue={info.description}
         label="Project Description"
       />
 
-      {/* Item List */}
       <ItemList items={items} setItems={setItems} />
 
-      {/* Buttons */}
-      <div className="flex justify-end gap-4 pt-6">
-        <Button type="button" variant="outline">
-          Discard
-        </Button>
-        <Button id="draft" variant="outline" type="submit">
+      <div className="flex gap-3 justify-end mt-5">
+        <Button type="submit" id="draft" variant="secondary">
           Save as Draft
         </Button>
-        <Button id="pending" type="submit">
+        <Button type="submit" id="pending">
           Save & Send
         </Button>
       </div>
@@ -217,17 +207,16 @@ function Form({ info = {}, onSubmit }) {
   );
 }
 
-function InputBlock({ label, name, defaultValue = "", type = "text" }) {
-  const labelText = label || name.replace(/([A-Z])/g, " $1");
+function InputBlock({ label, name, defaultValue, type = "text" }) {
   return (
-    <div className="flex flex-col gap-1.5 flex-1 min-w-[200px]">
-      <Label htmlFor={name}>{labelText}</Label>
+    <div className="flex flex-col">
+      {label && <Label htmlFor={name}>{label}</Label>}
       <Input
-        type={type}
         id={name}
         name={name}
+        type={type}
         defaultValue={defaultValue}
-        placeholder={labelText}
+        placeholder={label || name}
       />
     </div>
   );

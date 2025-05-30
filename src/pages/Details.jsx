@@ -18,6 +18,14 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import Form from "../components/Form";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetClose,
+} from "@/components/ui/sheet";
 
 export default function Details() {
   const { id } = useParams();
@@ -26,7 +34,6 @@ export default function Details() {
   const [loadingPaid, setLoadingPaid] = useState(false);
   const [error, setError] = useState(null);
   const [invoice, setInvoice] = useState(null);
-
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
@@ -91,7 +98,6 @@ export default function Details() {
     );
 
   if (error) return <p className="text-red-500 text-center mt-10">{error}</p>;
-
   if (!invoice) return <p className="text-center mt-10">Ma'lumot topilmadi</p>;
 
   const {
@@ -115,12 +121,12 @@ export default function Details() {
       </div>
 
       <main className="w-full md:w-2/4 pt-16 px-4 md:px-6">
-        {/* Status va action tugmalar */}
         <div className="bg-white dark:bg-zinc-900 rounded-md p-4 md:p-6 mb-6 shadow-md flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground">Status</span>
-            <StatusBadge status={status} />
+            {status && <StatusBadge status={status} />}
           </div>
+
           <div className="flex flex-wrap gap-2">
             <Button variant="ghost" onClick={() => setIsEditOpen(true)}>
               Edit
@@ -134,8 +140,7 @@ export default function Details() {
                 <DialogHeader>
                   <DialogTitle>Confirm Deletion?</DialogTitle>
                   <DialogDescription>
-                    Are you sure you want to delete invoice #{invoiceId}? This
-                    action cannot be undone.
+                    Are you sure you want to delete invoice #{invoiceId}?
                   </DialogDescription>
                 </DialogHeader>
                 <div className="flex gap-4 justify-end">
@@ -162,7 +167,6 @@ export default function Details() {
           </div>
         </div>
 
-        {/* Invoice tafsilotlari */}
         <div className="bg-white dark:bg-zinc-900 rounded-md shadow-md p-4 md:p-6 space-y-6">
           <div>
             <h2 className="font-bold text-lg">#{invoiceId}</h2>
@@ -199,7 +203,6 @@ export default function Details() {
             </div>
           </div>
 
-          {/* Items table */}
           <div className="bg-muted/40 rounded-md p-4">
             <div className="hidden sm:grid grid-cols-4 font-semibold text-sm mb-2">
               <span>Item Name</span>
@@ -220,10 +223,8 @@ export default function Details() {
                   className="grid grid-cols-1 sm:grid-cols-4 text-sm py-2 gap-2 border-b last:border-none"
                 >
                   <span>{item.name}</span>
-                  <span className="text-center sm:text-center">{quantity}</span>
-                  <span className="text-center sm:text-center">
-                    ${price.toFixed(2)}
-                  </span>
+                  <span className="text-center">{quantity}</span>
+                  <span className="text-center">${price.toFixed(2)}</span>
                   <span className="text-right font-medium">
                     ${totalItem.toFixed(2)}
                   </span>
@@ -240,24 +241,27 @@ export default function Details() {
           </div>
         </div>
 
-        {/* Edit Modal */}
-        <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
-          <DialogContent side="left">
-            <DialogHeader>
-              <DialogTitle>Edit Invoice #{invoiceId}</DialogTitle>
-              <DialogDescription>
+        <Sheet open={isEditOpen} onOpenChange={setIsEditOpen}>
+          <SheetContent
+            side="left"
+            className="pl-8 ml-[72px] min-w-[calc(80%-72px)] h-full overflow-y-auto"
+          >
+            <SheetHeader>
+              <SheetTitle>Edit Invoice #{invoice.id}</SheetTitle>
+              <SheetDescription>
                 Update your invoice details below.
-              </DialogDescription>
-            </DialogHeader>
-            {/* Formga invoice objectini to‘liq info sifatida yuboriladi */}
-            <Form info={invoice} onSubmit={handleUpdate} />
-            <DialogClose asChild>
-              <Button variant="ghost" className="mt-4">
-                Cancel
-              </Button>
-            </DialogClose>
-          </DialogContent>
-        </Dialog>
+              </SheetDescription>
+            </SheetHeader>
+            <div className="mt-4">
+              <Form info={invoice} onSubmit={handleUpdate} />
+              <SheetClose asChild>
+                <Button variant="ghost" className="mt-4 w-full">
+                  Cancel
+                </Button>
+              </SheetClose>
+            </div>
+          </SheetContent>
+        </Sheet>
       </main>
     </div>
   );

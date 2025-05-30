@@ -32,13 +32,13 @@ function ItemList({ items, setItems }) {
     <div className="space-y-4">
       <h3 className="text-xl font-semibold">Item List</h3>
 
-      {/* Sarlavhalar uchun flex konteyner */}
+      {/* Header */}
       <div className="flex items-center justify-between text-gray-500 font-semibold">
         <span className="w-[210px]">Item Name</span>
         <span className="w-[100px] text-center">Qty.</span>
         <span className="w-[100px] text-center">Price</span>
         <span className="w-[80px] text-center">Total</span>
-        <span className="w-[40px]"></span> {/* Bo‘sh joy tugma uchun */}
+        <span className="w-[40px]"></span>
       </div>
 
       <ul className="flex flex-col gap-5 mt-5">
