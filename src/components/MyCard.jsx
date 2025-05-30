@@ -26,7 +26,7 @@ function MyCard({
         <div className="flex items-center justify-between">
           <CardTitle className="font-bold text-xs tracking-[-0.25px] min-w-[80px] text-[#0C0E16] dark:text-white">
             <span className="text-[#7C5DFA]">#</span>
-            {invoicesId}
+            {id}
           </CardTitle>
           <CardDescription className="text-[#888EB0] dark:text-[#DFE3FA] text-xs min-w-[100px]">
             {createdAt}

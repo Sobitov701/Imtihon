@@ -121,6 +121,10 @@ export default function Details() {
       </div>
 
       <main className="w-full md:w-2/4 pt-16 px-4 md:px-6">
+        <Button variant="outline" onClick={() => navigate(-1)} className="mb-4">
+          Go Back
+        </Button>
+
         <div className="bg-white dark:bg-zinc-900 rounded-md p-4 md:p-6 mb-6 shadow-md flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground">Status</span>
@@ -140,7 +144,7 @@ export default function Details() {
                 <DialogHeader>
                   <DialogTitle>Confirm Deletion?</DialogTitle>
                   <DialogDescription>
-                    Are you sure you want to delete invoice #{invoiceId}?
+                    Are you sure you want to delete invoice #{id}?
                   </DialogDescription>
                 </DialogHeader>
                 <div className="flex gap-4 justify-end">
@@ -167,6 +171,7 @@ export default function Details() {
           </div>
         </div>
 
+        {/* Qolgan kod o‘zgarmadi */}
         <div className="bg-white dark:bg-zinc-900 rounded-md shadow-md p-4 md:p-6 space-y-6">
           <div>
             <h2 className="font-bold text-lg">#{invoiceId}</h2>
